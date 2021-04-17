@@ -6,6 +6,18 @@
   height: 40vmin;
   pointer-events: none;
 }
+.todo-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 15px;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
