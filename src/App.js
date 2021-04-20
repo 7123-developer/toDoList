@@ -1,14 +1,14 @@
 import "./App.css";
 import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "reactstrap";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import { button } from "reactstrap";
 import FontAwesome from "react-fontawesome";
 
 function App() {
   const [toDoData, setToDoData] = useState([]);
   const [userInput, setUserInput] = useState(null);
   const [updateInput, setUpdateInput] = useState("");
-  const [update, setUpdate] = useState(false);
+  const [update, setUpdate] = useState(null);
   const onchangeInput = (e) => {
     const { value } = e.target;
     const data = {
@@ -34,9 +34,9 @@ function App() {
       });
       setToDoData(updatetodo);
       setUpdateInput("");
-      setUpdate(false);
+      setUpdate(null);
     } else {
-      setUpdate(true);
+      setUpdate(data.id);
     }
   };
   const onDelete = (data) => {
@@ -48,7 +48,6 @@ function App() {
     setUpdateInput(value);
   };
   const onDoneTask = (e,data) => {
-    const {value} = e.target
     const updatetodo = toDoData.map((item) => {
       if (item.id === data.id) {
         item.done = !data.done;
@@ -69,24 +68,24 @@ function App() {
           placeholder="To Do Item"
           onChange={(e) => onchangeInput(e)}
         />
-        <Button color="primary" onClick={() => onSaveData()}>
+        <button color="primary" onClick={() => onSaveData()}>
           save{" "}
-        </Button>
+        </button>
       </div>
       {toDoData.length
         ? toDoData.map((item) => (
             <div className="todo-data-container">
         <div className="todo-data-wraper">
               <div >
-                {update ? (
+                {update === item.id ? (
                   <div className="main-input-container">
                     <input
                       defaultValue={item.name}
                       onChange={(e) => onUpdateInput(e)}
                     />
-                    <Button color="primary" onClick={() => onUpdateData(item)}>
+                    <button color="primary" onClick={() => onUpdateData(item)}>
                       Update{" "}
-                    </Button>
+                    </button>
                   </div>
                 ) : (
                   <div className="checkbox-text">
@@ -98,12 +97,12 @@ function App() {
                 )}
               </div>
 
-              {update ? null : (
+              {update !== item.id? (
                 <div className="button-container">
                   <FontAwesome name="edit" onClick={() => onUpdateData(item)} />
                   <FontAwesome name="trash" onClick={() => onDelete(item)} />
                 </div>
-              )}
+              ) : null}
             </div>
             </div>
           ))
