@@ -40,6 +40,11 @@
     justify-content: space-between;
     width: 50%;
 }
+.todo-data-wraper .main-input-container {
+  width: 100%;
+  justify-content: space-between;
+  align-items: unset;
+}
 .checkbox-text input {
   margin-right: 25px;
 }
